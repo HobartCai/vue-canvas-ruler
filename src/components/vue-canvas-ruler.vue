@@ -7,6 +7,12 @@ let $ctx: Context2D | null | undefined;
 
 const CANVAS_HEIGHT = 40;
 
+function getFixed(sparsity: number) {
+  const pointIdx = String(sparsity).indexOf(".");
+  const len = String(sparsity).length;
+  return pointIdx < 0 ? 0 : len - pointIdx - 1;
+}
+
 function isCloseToInteger(num: number) {
   return Math.abs(num - Math.round(num)) < 0.0000001;
 }
@@ -34,6 +40,7 @@ function draw(
   // drawScale
   const pixelPerUnit = basePixelPerUnit * scale * sparsity;
   const gap = pixelPerUnit / part;
+  const fixed = getFixed(sparsity);
   let index = offset % gap > 0 ? gap - (offset % gap) : -offset % gap;
   $ctx.lineWidth = 1;
   $ctx.strokeStyle = "black";
@@ -44,7 +51,7 @@ function draw(
       // draw long scale
       $ctx.moveTo(index, h * 0.85);
       $ctx.lineTo(index, 0);
-      $ctx.fillText(String(Math.round(num)), index + 5.5, h * 0.85);
+      $ctx.fillText(num.toFixed(fixed), index + 5.5, h * 0.85);
     } else {
       // draw short scale
       $ctx.moveTo(index, h * 0.5);
