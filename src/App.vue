@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import VueCanvasRuler from "./components/vue-canvas-ruler.vue";
 
 const pixelPerUnit = ref(1);
@@ -22,7 +22,7 @@ const part = ref(10);
     <div><input v-model="pixelPerUnit" type="number" min="0" /></div>
     <div><span>Scale :</span></div>
     <div><input v-model="scale" type="number" step="0.1" min="0.1" /></div>
-    <div><span>Offset :</span></div>
+    <div><span>Offset (pixel):</span></div>
     <div><input v-model="offset" type="number" /></div>
     <div><span>Sparsity :</span></div>
     <div><input v-model="sparsity" type="number" min="0" /></div>
